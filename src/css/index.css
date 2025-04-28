@@ -1,29 +1,20 @@
 body,
 html {
-    margin: 0;
-    padding: 0;
     height: 100%;
 }
 
-
-
-
-/* Gradiente para el modal */
-.gradient-custom {
-    /* fallback for old browsers */
-    background: #6a11cb;
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+main {
+    min-height: calc(100vh - 100px);
+    /* Ajusta según el alto de tu navbar + footer */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-/* Opcional: estilos para el botón de login en el navbar */
-.navbar .btn {
-    margin-left: 10px;
-}
-
-/* Asegura que el contenido del modal se vea correctamente en dispositivos pequeños */
-.modal-fullscreen-sm-down .modal-dialog {
-    margin: 1rem;
+footer {
+    background-color: #343a40;
+    /* Gris oscuro */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
 }

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/src/css/index.css">
+
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <header class="bg-primary text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <h1>ConecITVO</h1>
+            </div>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Inicio</a></li>
+                    <li class="nav-item"><a href="#perfil" class="nav-link text-white">Mi Perfil</a></li>
+                    <li class="nav-item"><a href="#mis-contribuciones" class="nav-link text-white">Mis
+                            contribuciones</a>
+                    </li>
+                    <li class="nav-item"><a href="#notificaciones" class="nav-link text-white">Notificaciones</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu dropdown">
+                <a href="#" class="d-flex align-items-center" id="userDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <img src="/src/assets/image/icono perfil.png" alt="Foto de Perfil" class="rounded-circle" width="40"
+                        style="cursor: pointer;">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="#">Configuración</a></li>
+                    <li><a class="dropdown-item" href="#" id="logoutBtn">Cerrar sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="container py-5 d-flex">
+        <!-- Sidebar -->
+        <div class="col-3">
+            <div class="sidebar bg-light p-3 rounded">
+                <h4>Perfil Rápido</h4>
+                <img src="/src/assets/image/icono perfil.png" alt="Foto de Perfil" class="img-fluid rounded-circle mb-2"
+                    width="80">
+                <h5>Juan Pérez</h5>
+                <p>Ingeniería en Tic´s</p>
+                <a href="#editar-perfil" class="btn btn-primary btn-sm w-100">Editar Perfil</a>
+                <hr>
+                <h5>Acciones Rápidas</h5>
+                <a href="#crear-publicacion" class="btn btn-success w-100 mb-2">Crear contribución</a>
+                <a href="#explorar" class="btn btn-secondary w-100">Explorar</a>
+            </div>
+        </div>
+
+        <!-- Publicaciones -->
+        <section id="feed">
+            <div class="post mb-4 p-3 border">
+                <div class="d-flex justify-content-between">
+                    <div class="user-info">
+                        <img src="/src/assets/image/icono perfil.png" alt="Avatar" class="rounded-circle" width="40">
+                        <strong>BenitoAlavez</strong> - <small>Hace 2 horas</small>
+                    </div>
+                    <div class="post-actions d-flex gap-3">
+                        <button class="btn btn-link text-decoration-none">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                        </button>
+                        <button class="btn btn-link text-decoration-none">
+                            <i class="bi bi-chat-dots"></i>
+                        </button>
+                    </div>
+                </div>
+                <p>Este es un ejemplo de publicación de un usuario.</p>
+                <img src="https://txsplus.com/wp-content/uploads/2021/11/ORACLE.jpg.webp" alt="Publicación"
+                    class="img-fluid">
+            </div>
+        </section>
+    </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="bg-dark text-white py-2 mt-5">
+        <div class="container text-center">
+            <div class="d-flex justify-content-center gap-4">
+                <a href="https://www.facebook.com/itvalleoaxaca?locale=es_LA" class="text-white" target="_blank"><i
+                        class="bi bi-facebook fs-3"></i></a>
+                <a href="https://www.instagram.com/tecnm_itvo/" class="text-white"><i class="bi bi-instagram fs-3"
+                        target="_blank"></i></a>
+                <a href="https://www.voaxaca.tecnm.mx/" class="text-white" target="_blank">
+                    <i class="bi bi-globe fs-3"></i>
+                </a>
+            </div>
+            <p class="mt-3 mb-0 small">&copy; 2025 ConecITVO. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/src/js/login.js"></script>
+</body>
+
+</html>
