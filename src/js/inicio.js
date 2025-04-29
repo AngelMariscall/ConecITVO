@@ -1,8 +1,6 @@
-// Este archivo solo se ejecutará en inicio.html
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Verificar si el usuario está logueado
-    if (sessionStorage.getItem("loggedIn") !== "true") {
+    if (sessionStorage.getItem("loggedIn") !== "true") { // Verificar si el usuario está logueado
         // Si no está logueado, redirigir a login
         window.location.href = "/src/index.html";
     }

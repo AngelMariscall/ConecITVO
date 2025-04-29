@@ -1,4 +1,3 @@
-// Este archivo solo se ejecutará en index.html
 
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener el formulario de login

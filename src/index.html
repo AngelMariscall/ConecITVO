@@ -7,8 +7,7 @@
     <title>ConecITVO</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS -->
-    <link rel="stylesheet" href="/src/css/index.css">
+    <!-- Iconos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
 </head>
@@ -42,7 +41,7 @@
     <!-- Modal de Login -->
     <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content needs-validation" novalidate> <!-- AÑADIDO needs-validation -->
+            <div class="modal-content needs-validation" novalidate> <!-- Validacion -->
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modalLoginLabel">BIENVENIDO</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -58,7 +57,7 @@
                             <input type="password" class="form-control" id="idPassword" placeholder="Password" required>
                             <label for="idPassword">Contraseña</label>
                         </div>
-                        <!-- ALERTA DE ERROR (inicialmente oculta) -->
+                        <!-- contraseña o correo incorrecto -->
                         <div id="loginError" class="alert alert-danger d-none" role="alert">
                             Correo o contraseña incorrectos.
                         </div>
@@ -91,13 +90,13 @@
     </div>
 
 
-    <!-- Banner llamativo -->
+    <!-- Banner -->
     <section class="banner text-center text-white bg-dark py-3">
         <div class="container text-center text-white">
             <h2>Conéctate con la comunidad del ITVO</h2>
             <p>Comparte ideas, colabora en proyectos y accede a oportunidades.</p>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLogin"
-                data-bs-whatever="@mdo">UNETE A NOSOTROS</button>
+                data-bs-whatever="@mdo">INICIAR SESION</button>
         </div>
     </section>
 
@@ -129,16 +128,17 @@
             apoyar a los estudiantes en cada etapa de sus proyectos:
             <ul>
                 <dt>Colaboración en línea:</dt>
-                <dd>Foros, chats, tableros de proyectos y libros que facilitan la comunicación efectiva entre
+                <dd>Foros, chats, publicaciones que facilitan la comunicación efectiva entre
                     estudiantes de toda la institucion.</dd>
                 <dt>Recursos y herramientas:</dt>
-                <dd> Acceso a materiales que apoyan al conocimiento y aprendizaje de los estudiantes.</dd>
+                <dd> Acceso a materiales como tableros de proyectos y libros que apoyan al conocimiento y aprendizaje de
+                    los estudiantes.</dd>
                 <dt>Perfiles y reconocimiento:</dt>
-                <dd> Perfiles personalizados que muestran logros y participación, incentivando la motivación y el
+                <dd> Perfiles personalizados que muestran logros y la participación, incentivando la motivación y el
                     compromiso.</dd>
                 <dt>Difusión y redes sociales:</dt>
                 <dd> Integración con plataformas sociales para compartir y promover los proyectos, aumentando su
-                    visibilidad y alcance dentro y fuera del ITVO.</dd>
+                    visibilidad y alcance</dd>
             </ul>
         </dl>
     </section>
@@ -175,8 +175,8 @@
             <div class="d-flex justify-content-center gap-4">
                 <a href="https://www.facebook.com/itvalleoaxaca?locale=es_LA" class="text-white" target="_blank"><i
                         class="bi bi-facebook fs-3"></i></a>
-                <a href="https://www.instagram.com/tecnm_itvo/" class="text-white"><i class="bi bi-instagram fs-3"
-                        target="_blank"></i></a>
+                <a href="https://www.instagram.com/tecnm_itvo/" class="text-white" target="_blank"><i
+                        class="bi bi-instagram fs-3"></i></a>
                 <a href="https://www.voaxaca.tecnm.mx/" class="text-white" target="_blank">
                     <i class="bi bi-globe fs-3"></i>
                 </a>
@@ -187,6 +187,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- archivo js para pagina -->
     <script src="/src/js/index.js"></script>
 </body>
 

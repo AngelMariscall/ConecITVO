@@ -9,8 +9,7 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/src/css/index.css">
+  <!-- Iconos de Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
@@ -35,22 +34,26 @@
   <!-- Modal de Login -->
   <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
+      <div class="modal-content needs-validation" novalidate> <!-- validacion -->
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="modalLoginLabel">BIENVENIDO</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="loginForm">
             <div class="mb-4 form-floating mb-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@voaxaca.tecnm.mx">
-              <label for="floatingInput">Correo</label>
+              <input type="email" class="form-control" id="txtEmail" placeholder="name@voaxaca.tecnm.mx" required>
+              <label for="txtEmail">Correo</label>
             </div>
             <div class="mb-4 form-floating">
-              <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-              <label for="floatingPassword">Contraseña</label>
+              <input type="password" class="form-control" id="idPassword" placeholder="Password" required>
+              <label for="idPassword">Contraseña</label>
             </div>
-            <button type="submit" class="btn btn-primary container text-center">Iniciar Sesión</button>
+            <!-- alerta de contraseña o correo incorrecto -->
+            <div id="loginError" class="alert alert-danger d-none" role="alert">
+              Correo o contraseña incorrectos.
+            </div>
+            <button type="submit" class="btn btn-primary container text-center mt-3">Iniciar Sesión</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -61,18 +64,24 @@
   </div>
 
   <!-- Banner -->
-  <section class="bg-primary text-white py-5">
+  <section class="bg-primary text-white py-2">
+    <img src="/src/assets/image/imagen (1).jpg" alt="Banner" class="w-100" style="height: 350px; object-fit: cover;">
+    <div class="overlay"></div>
     <div class="container text-center">
-      <h1 class="display-4 mb-3">¡Bienvenido a ConecITVO!</h1>
-      <p class="lead mb-4">Regístrate para acceder a todas las funcionalidades de la plataforma.</p>
+      <h1 class="display-4 py-2">¡Bienvenido a ConecITVO!</h1>
+      <p class="lead mb-4 py-3">Regístrate para acceder a todas las funcionalidades de la plataforma.</p>
     </div>
   </section>
 
-  <!-- Formulario Registro -->
+  <!-- Formulario de registro -->
   <section class="container py-5">
     <div class="p-4 border border-primary-subtle rounded-4 shadow-sm bg-white">
       <form class="row g-3 needs-validation" id="formRegistro" novalidate>
 
+        <div class="col-md-12 text-center mb-4">
+          <h2 class="fw-bold">Formulario de Registro</h2>
+          <p class="text-muted">Por favor, completa todos los campos</p>
+        </div>
         <div class="col-md-6 position-relative">
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="nombre" placeholder="Nombre(s)" required>
@@ -119,8 +128,8 @@
 
         <div class="col-md-2 position-relative">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="matrícula" placeholder="Numero de control" required>
-            <label for="matrícula ">Numero de control</label>
+            <input type="text" class="form-control" id="matricula" placeholder="Numero de control" required>
+            <label for="matricula">Numero de control</label>
             <div class="invalid-tooltip">Ingrese un numero de control válido.</div>
           </div>
         </div>
@@ -135,7 +144,7 @@
 
         <div class="col-md-1 position-relative">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="grupo" placeholder="Grupo" required>
+            <input type="text" class="form-control" id="grupo" placeholder="Grupo" maxlength="2" required>
             <label for="grupo">Grupo</label>
             <div class="invalid-tooltip">Ingrese su grupo.</div>
           </div>
@@ -173,7 +182,7 @@
             <div class="invalid-tooltip">Confirme su contraseña.</div>
           </div>
         </div>
-
+        <hr>
         <div class="container text-center">
           <button class="btn btn-primary btn-lg" type="submit">REGISTRARSE</button>
         </div>
@@ -187,8 +196,8 @@
       <div class="d-flex justify-content-center gap-4">
         <a href="https://www.facebook.com/itvalleoaxaca?locale=es_LA" class="text-white" target="_blank"><i
             class="bi bi-facebook fs-3"></i></a>
-        <a href="https://www.instagram.com/tecnm_itvo/" class="text-white"><i class="bi bi-instagram fs-3"
-            target="_blank"></i></a>
+        <a href="https://www.instagram.com/tecnm_itvo/" class="text-white" target="_blank"><i
+            class="bi bi-instagram fs-3"></i></a>
         <a href="https://www.voaxaca.tecnm.mx/" class="text-white" target="_blank">
           <i class="bi bi-globe fs-3"></i>
         </a>
