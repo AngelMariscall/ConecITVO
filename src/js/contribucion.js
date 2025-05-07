@@ -1,5 +1,20 @@
+
+export default class contribucion {
+
+    constructor(id, titulo, descripcion, categoria, fecha, autor, archivo) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.categoria = categoria;
+        this.fecha = fecha;
+        this.autor = autor;
+        this.archivo = archivo;
+    }
+}
+
+
 // contribucion.js
-import botones from './buttons.js';
+/*import botones from './buttons.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     if (sessionStorage.getItem("loggedIn") !== "true") { // Verificar si el usuario está logueado
@@ -115,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
  * Crea y añade una nueva fila a la tabla de contribuciones,
  * incluyendo un enlace al PDF subido.
  */
-function agregarFila(fd) {
+/*function agregarFila(fd) {
     const tbody = document.getElementById('tablaContribuciones');
     const tr = document.createElement('tr');
 
@@ -165,4 +180,4 @@ function ocultarTablaContribuciones() {
 
 function mostrarTablaContribuciones() {
     document.getElementById('tableWrapper').style.display = 'block';
-}
+}*/
