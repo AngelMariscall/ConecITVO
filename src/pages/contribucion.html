@@ -45,7 +45,7 @@
                 <div class="col-md-6 position-relative">
                     <div class="form-floating mb-3">
                         <input type="number" class="form-control" id="identificador" name="identificador"
-                            placeholder="ID" required>
+                            placeholder="ID" min="1" required>
                         <label for="identificador">Id del archivo</label>
                         <div class="invalid-tooltip">Ingrese un id válido.</div>
                     </div>
@@ -62,9 +62,9 @@
                 <!-- Nombre del autor -->
                 <div class="col-md-6 position-relative">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="autor" name="autor"
-                            placeholder="Nombre del autor (opcional)">
-                        <label for="autor">Nombre del autor (opcional)</label>
+                        <input type="text" class="form-control" id="autor" name="autor" placeholder="Nombre del autor "
+                            required>
+                        <label for="autor">Nombre del autor</label>
                         <div class="invalid-tooltip">Ingrese un nombre válido.</div>
                     </div>
                 </div>
@@ -122,6 +122,15 @@
 
     <!-- Tabla de contribuciones -->
     <div id="tableWrapper" class="p-4 border border-primary-subtle rounded-4 shadow-sm bg-white">
+        <!-- BARRA DE BÚSQUEDA GLOBAL -->
+        <div class="container my-3">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control"
+                    placeholder="Buscar contribución (ID, título, autor, categoría, fecha…)">
+                <button class="btn btn-outline-secondary" type="button" id="btnSearch">🔍 Buscar</button>
+                <button class="btn btn-outline-secondary" type="button" id="btnClearSearch">✖️ Limpiar</button>
+            </div>
+        </div>
         <div class="table-responsive mt-4">
             <table class="table table-striped table-hover align-middle">
                 <thead class="table-primary">
@@ -141,12 +150,45 @@
         </div>
     </div>
 
+    <!-- Modal de alertas  -->
+    <div class="modal fade" id="miModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="miModalLabel"></h5>
+                </div>
+                <div class="modal-body text-center" id="modalCuerpo"></div>
+                <div class="modal-footer d-none" id="modalFooter">
+                    <button type="button" class="btn btn-primary" id="btnModalAceptar">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" id="btnModalCancelar">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para confirmaciones -->
+    <div class="modal fade" id="confirmModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title text-center">Confirmación</h5>
+                </div>
+                <div class="modal-body text-center" id="confirmModalMessage"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btnModalConfirmar">Sí</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="/src/js/buttons.js" type="module"></script>
-    <script src="/src/js/session.js" type="module"></script>
+    <script src="/src/js/botones.js" type="module"></script>
+    <script src="/src/js/tablaEventos.js" type="module"></script>
 </body>
 
 </html>

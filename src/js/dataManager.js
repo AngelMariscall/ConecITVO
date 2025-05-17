@@ -4,36 +4,35 @@ export default class DataManager {
         this.dbSession = JSON.parse(sessionStorage.getItem(this.keySession)) || [];
     }
 
-    //CRUD
-    //Create
-    createData(objArticulo) {
-        this.dbSession.push(objArticulo);
+    // CREATE
+    createData(objContribucion) {
+        this.dbSession.push(objContribucion);
         sessionStorage.setItem(this.keySession, JSON.stringify(this.dbSession));
     }
 
-    //Read
+    // READ
     readData() {
         return this.dbSession;
     }
 
-    //Update
-    updateData(id, newArticulo) {
-        this.dbSession = this.dbSession.map((articulo) => {
-            if (articulo.id === id) {
-                return { ...articulo, ...newArticulo };
+    // UPDATE
+    updateData(id, nuevaContribucion) {
+        this.dbSession = this.dbSession.map((contribucion) => {
+            if (contribucion.id === id) {
+                return { ...contribucion, ...nuevaContribucion };
             }
-            return articulo;
+            return contribucion;
         });
         sessionStorage.setItem(this.keySession, JSON.stringify(this.dbSession));
     }
 
-    //Delete
+    // DELETE
     deleteData(id) {
-        this.dbSession = this.dbSession.filter((articulo) => articulo.id !== id);
+        this.dbSession = this.dbSession.filter((contribucion) => contribucion.id !== id);
         sessionStorage.setItem(this.keySession, JSON.stringify(this.dbSession));
     }
 
-    //Clear
+    // CLEAR
     clearData() {
         this.dbSession = [];
         sessionStorage.removeItem(this.keySession);

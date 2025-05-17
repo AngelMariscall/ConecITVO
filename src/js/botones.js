@@ -1,4 +1,4 @@
-// buttons.js
+// Propiedades de los botones
 const botones = {
     btnEditar: {
         id: 'btnEditar',
@@ -30,6 +30,7 @@ const botones = {
     },
 };
 
+// Función para crear los botones de acción
 function crearBotonesAcciones(celdaAcciones, imgBoton, id, ruta, title) {
     imgBoton.id = id;
     imgBoton.src = ruta;
@@ -39,7 +40,8 @@ function crearBotonesAcciones(celdaAcciones, imgBoton, id, ruta, title) {
     celdaAcciones.appendChild(imgBoton);
 }
 
-function ChangeButtonEvent(event, nuevoId, nuevaRuta, nuevoTitulo) {
+// Función para cambiar el evento de un botón
+function botonConEvento(event, nuevoId, nuevaRuta, nuevoTitulo) {
     const t = event.target;
     if (t) {
         t.id = nuevoId;
@@ -49,6 +51,7 @@ function ChangeButtonEvent(event, nuevoId, nuevaRuta, nuevoTitulo) {
     }
 }
 
+// Función para cambiar el evento de un botón sin evento
 function botonSinEvento(boton, nuevoId, nuevaRuta, nuevoTitulo) {
     if (boton) {
         boton.id = nuevoId;
@@ -58,4 +61,4 @@ function botonSinEvento(boton, nuevoId, nuevaRuta, nuevoTitulo) {
     }
 }
 
-export default { botones, crearBotonesAcciones, ChangeButtonEvent, botonSinEvento };
+export default { botones, crearBotonesAcciones, botonConEvento, botonSinEvento };
