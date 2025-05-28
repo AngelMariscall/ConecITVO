@@ -15,10 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('formContribucion').addEventListener('submit', function (event) {
         event.preventDefault();
 
+        // Validación del formulario
         if (!this.checkValidity()) {
             this.classList.add('was-validated');
             return;
         }
+
 
         const formData = new FormData(this);
         const archivo = formData.get('archivo');
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const archivoURL = URL.createObjectURL(archivo);
+        const archivoNombre = archivo.name;
 
         const nuevaContribucion = new Contribucion(
             id,
@@ -39,7 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
             formData.get('categoria'),
             formData.get('fecha'),
             formData.get('autor'),
-            archivoURL
+            archivoURL,
+            archivoNombre
         );
 
         //crea en sessionStorage
@@ -54,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const tbody = document.getElementById('tablaContribuciones');
             // Construimos la fila igual que en agregarFilaTabla pero para un solo objeto:
             const tr = document.createElement('tr');
-            const props = ["id", "titulo", "descripcion", "categoria", "fecha", "autor"];
+            const props = ["id", "titulo", "descripcion", "categoria", "fecha", "autor", "nombreArchivo"];
             props.forEach(prop => {
                 const td = document.createElement('td');
                 td.textContent = nuevaContribucion[prop];
@@ -75,11 +79,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const btnEliminar = document.createElement('img');
             Buttons.crearBotonesAcciones(
                 actionsCell, btnEditar,
-                Buttons.botones.btnEditar.id, Buttons.botones.btnEditar.ruta, Buttons.botones.btnEditar.title
+                Buttons.botones.btnEditar.id,
+                Buttons.botones.btnEditar.ruta,
+                Buttons.botones.btnEditar.title
             );
             Buttons.crearBotonesAcciones(
                 actionsCell, btnEliminar,
-                Buttons.botones.btnEliminar.id, Buttons.botones.btnEliminar.ruta, Buttons.botones.btnEliminar.title
+                Buttons.botones.btnEliminar.id,
+                Buttons.botones.btnEliminar.ruta,
+                Buttons.botones.btnEliminar.title
             );
             tr.appendChild(actionsCell);
 
@@ -156,6 +164,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let archivoOriginal = null;     // <-- para almacenar la URL previa
     let modoEdicionActivo = false;
 
+    // … (imports y setup inicial, DataManager, etc.)
+
     document.getElementById('tablaContribuciones').addEventListener('click', function (event) {
         const idBoton = event.target.id;
         const fila = event.target.closest('tr');
@@ -171,13 +181,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const celdas = fila.querySelectorAll('td');
             datosCeldas = [];
+            let archivoOriginal = null;
 
+            // 1) Recorremos todas las celdas, menos ID (i===0) y menos las últimas 2 (ver archivo + acciones)
             celdas.forEach((celda, i) => {
                 if (i === 0 || i >= celdas.length - 2) return;
 
                 const valor = celda.textContent.trim();
                 datosCeldas.push(valor);
 
+                // i===4 → fecha
                 if (i === 4) {
                     const inputFecha = document.createElement('input');
                     inputFecha.type = 'date';
@@ -188,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
 
+                // i===3 → categoría
                 if (i === 3) {
                     const selectOriginal = document.getElementById('categoria');
                     const select = selectOriginal.cloneNode(true);
@@ -198,6 +212,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
 
+                // i===6 → nombreArchivo
+                if (i === celdas.length - 3) {
+                    const inputNombreArchivo = document.createElement('input');
+                    inputNombreArchivo.type = 'text';
+                    inputNombreArchivo.className = 'form-control';
+                    inputNombreArchivo.value = valor;
+                    celda.textContent = '';
+                    celda.appendChild(inputNombreArchivo);
+                    return;
+                }
+
+                // resto (título, descripción, autor)
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.value = valor;
@@ -206,8 +232,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 celda.appendChild(input);
             });
 
+            // 2) “Ver archivo” está en la penúltima celda (índice length-2)
             const celdaArchivo = celdas[celdas.length - 2];
             archivoOriginal = celdaArchivo.dataset.archivo || null;
+
+            // En esa misma celda ponemos el botón “Cambiar archivo”
             const botonArchivo = document.createElement('button');
             botonArchivo.textContent = "Cambiar archivo";
             botonArchivo.className = "btn btn-warning btn-sm";
@@ -225,6 +254,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                     const urlArchivo = URL.createObjectURL(nuevoArchivo);
                     celdaArchivo.dataset.archivo = urlArchivo;
+
+                    // Actualizamos el <input> en la celda “nombreArchivo”
+                    const celdaNombreArchivo = celdas[celdas.length - 3];
+                    const inputNombreArchivo = celdaNombreArchivo.querySelector('input');
+                    if (inputNombreArchivo) {
+                        inputNombreArchivo.value = nuevoArchivo.name;
+                    }
+
                     mostrarModal("Archivo actualizado correctamente", "success");
                 });
 
@@ -234,6 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
             celdaArchivo.textContent = '';
             celdaArchivo.appendChild(botonArchivo);
 
+            // Cambiamos botones (Editar → Guardar, Eliminar → Cancelar)
             const btnEditar = fila.querySelector('#btnEditar');
             const btnEliminar = fila.querySelector('#btnEliminar');
 
@@ -243,7 +281,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 Buttons.botones.btnGuardar.ruta,
                 Buttons.botones.btnGuardar.title
             );
-
             Buttons.botonSinEvento(
                 btnEliminar,
                 Buttons.botones.btnCancelar.id,
@@ -255,15 +292,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // === GUARDAR ===
         if (idBoton === 'btnGuardar') {
             const celdas = fila.querySelectorAll('td');
-            const id = fila.cells[0].textContent;
+            const id = celdas[0].textContent;
 
             const inputTitulo = celdas[1].querySelector('input');
             const inputDescripcion = celdas[2].querySelector('input');
             const selectCategoria = celdas[3].querySelector('select');
             const inputFecha = celdas[4].querySelector('input');
             const inputAutor = celdas[5].querySelector('input');
-            const celdaArchivo = celdas[6];
+            const celdaNombreArchivo = celdas[6];
+            const celdaArchivo = celdas[7];
             const archivoURL = celdaArchivo.dataset.archivo;
+
+            // Recuperar valor del <input> nombreArchivo
+            const inputNombreArchivo = celdaNombreArchivo.querySelector('input');
+            const nombreArchivoValor = inputNombreArchivo ? inputNombreArchivo.value.trim() : "";
 
             if (
                 !inputTitulo.value.trim() ||
@@ -283,7 +325,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectCategoria.value,
                 inputFecha.value,
                 inputAutor.value.trim(),
-                archivoURL || dataManager.readData().find(a => a.id === id).archivo
+                archivoURL,         // URL real del archivo
+                nombreArchivoValor  // nombre actualizado (o el mismo si no se cambió)
             );
 
             dataManager.updateData(id, nuevaContribucion);
@@ -299,10 +342,19 @@ document.addEventListener('DOMContentLoaded', function () {
             modoEdicionActivo = false;
             const celdas = fila.querySelectorAll('td');
             let iDato = 0;
+            const archivoOriginal = fila.querySelector('td[data-archivo]').dataset.archivo;
 
             celdas.forEach((celda, i) => {
-                if (i === 0) return;
+                if (i === 0) return; // ID no se edita
 
+                // Restaurar “nombreArchivo” en i === length-3
+                if (i === celdas.length - 3) {
+                    celda.textContent = datosCeldas[iDato];
+                    iDato++;
+                    return;
+                }
+
+                // Restaurar “Ver archivo” en i === length-2
                 if (i === celdas.length - 2) {
                     celda.textContent = '';
                     const btnVerArchivo = document.createElement('button');
@@ -316,24 +368,26 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
 
+                // Ignorar columna de acciones (i === length-1)
                 if (i === celdas.length - 1) return;
 
+                // Resto de celdas (titulo, descripción, categoría, fecha, autor)
                 celda.textContent = datosCeldas[iDato];
                 iDato++;
             });
 
+            // Revertir botones (Cancelar → Eliminar, Guardar → Editar)
             const btnCancelar = fila.querySelector('#btnCancelar');
             const btnGuardar = fila.querySelector('#btnGuardar');
 
             Buttons.botonConEvento(
-                { target: btnGuardar }, // ahora el que era Guardar se vuelve Editar
+                { target: btnGuardar },
                 Buttons.botones.btnEditar.id,
                 Buttons.botones.btnEditar.ruta,
                 Buttons.botones.btnEditar.title
             );
-
             Buttons.botonSinEvento(
-                btnCancelar, // el que era Cancelar se vuelve Eliminar
+                btnCancelar,
                 Buttons.botones.btnEliminar.id,
                 Buttons.botones.btnEliminar.ruta,
                 Buttons.botones.btnEliminar.title
@@ -347,7 +401,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const id = fila.cells[0].textContent;
             const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
             const mensaje = document.getElementById('confirmModalMessage');
-
             mensaje.textContent = "¿Estás seguro de que deseas eliminar esta contribución?";
             modal.show();
 
@@ -355,11 +408,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 fila.remove();
                 dataManager.deleteData(id);
                 mostrarModal("Contribución eliminada correctamente", "success");
-
                 if (document.querySelectorAll('#tablaContribuciones tr').length === 0) {
                     ocultarTablaProductos();
                 }
-
                 modal.hide();
             };
         }
@@ -385,7 +436,7 @@ function agregarFilaTabla(dataSession, tbody) {
     tbody.textContent = "";
     for (const articulo of dataSession) {
         const newRow = document.createElement('tr');
-        const props = ["id", "titulo", "descripcion", "categoria", "fecha", "autor"];
+        const props = ["id", "titulo", "descripcion", "categoria", "fecha", "autor", "nombreArchivo"];
 
         props.forEach(prop => {
             const td = document.createElement('td');
